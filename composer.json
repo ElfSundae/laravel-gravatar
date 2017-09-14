@@ -16,21 +16,9 @@
         "php": ">=5.4.0",
         "illuminate/support": "*"
     },
-    "require-dev": {
-        "mockery/mockery": "*",
-        "phpunit/phpunit": "*"
-    },
     "autoload": {
         "files": [
             "src/helpers.php"
         ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ElfSundae\\Laravel\\Gravatar\\Test\\": "tests/"
-        }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
     }
 }
