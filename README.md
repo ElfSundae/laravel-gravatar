@@ -1,6 +1,6 @@
 # Laravel Gravatar Helper
 
-<img align="right" src="https://secure.gravatar.com/avatar/000000">
+<img align="right" src="https://gravatar.cat.net/avatar/00000000000000000000000000000000">
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/elfsundae/laravel-gravatar.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-gravatar)
 
