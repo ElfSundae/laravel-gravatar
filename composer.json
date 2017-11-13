@@ -1,7 +1,7 @@
 {
     "name": "elfsundae/laravel-gravatar",
     "type": "library",
-    "description": "Laravel Gravatar Helper",
+    "description": "The easiest way to generate Gravatar avatar URL.",
     "keywords": ["laravel", "gravatar", "helper"],
     "homepage": "https://github.com/ElfSundae/laravel-gravatar",
     "license": "MIT",
