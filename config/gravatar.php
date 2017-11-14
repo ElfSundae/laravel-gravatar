@@ -19,7 +19,7 @@ return [
     | size / s      Avatar size in pixel, default is 80.
     | default / d   The default avatar image:
     |                   404, mm, identicon, monsterid, wavatar, retro,
-    |                   robohash, blank, urlencode("http://image/url")
+    |                   robohash, blank, http://image/url
     | rating / r    The highest avatar rating, default is "g": g, pg, r, x.
     | forcedefault / f  If for some reason you wanted to force the default image
     |                   to always load, set this value to "y".
