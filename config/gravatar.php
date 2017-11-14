@@ -7,10 +7,9 @@ return [
     | Gravatar - Globally Recognized Avatars - https://gravatar.com
     |--------------------------------------------------------------------------
     |
-    | Every configuration value can be an empty string or null to use the
-    | Gravatar default value.
+    | Here are each of the Gravatar connections setup for your application.
     |
-    | Possible Keys:
+    | Possible Configurations:
     |
     | url           Root URL of Gravatar service:
     |                   https://secure.gravatar.com/avatar         (Default)
@@ -27,20 +26,16 @@ return [
     |
     */
 
-    'gravatar' => [
+    'default' => [
+        'size' => 120,
+    ],
 
-        'default' => [
-            'size' => 120,
-        ],
+    'small' => [
+        's' => 40,
+    ],
 
-        'small' => [
-            's' => 40,
-        ],
-
-        'large' => [
-            's' => 640,
-        ],
-
+    'large' => [
+        's' => 640,
     ],
 
 ];
