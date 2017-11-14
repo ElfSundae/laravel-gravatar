@@ -4,18 +4,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Gravatar - Globally Recognized Avatars - https://gravatar.com
+    | Gravatar Connections
     |--------------------------------------------------------------------------
     |
     | Here are each of the Gravatar connections setup for your application.
+    | See https://gravatar.com/site/implement/images/ for details.
     |
-    | Possible Configurations:
+    | Possible Keys:
     |
-    | url           Root URL of Gravatar service:
+    | url           The base URL:
     |                   https://secure.gravatar.com/avatar         (Default)
     |                   https://gravatar.cat.net/avatar            (China Mirror)
     |                   https://v2ex.assets.uxengine.net/gravatar  (China Mirror)
-    | extension     File-type extension: jpg, png, etc.
     | size / s      Avatar size in pixel, default is 80.
     | default / d   The default avatar image:
     |                   404, mm, identicon, monsterid, wavatar, retro,
@@ -35,7 +35,7 @@ return [
     ],
 
     'large' => [
-        's' => 640,
+        's' => 460,
     ],
 
 ];

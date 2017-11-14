@@ -1,28 +1,21 @@
 <?php
 
+use Illuminate\Support\Arr;
+
 if (! function_exists('gravatar')) {
     /**
-     * Generate Gravatar URL for the given email address.
+     * Generate Gravatar avatar URL for the given email address.
      *
      * @param  string  $email
-     * @param  int|string|null  $size
-     * @param  string|null  $default
-     * @param  string|null  $rating
+     * @param  string  $connection
      * @return string
      */
-    function gravatar($email, $size = null, $default = null, $rating = null)
+    function gravatar($email, $connection = 'default')
     {
-        foreach ($parameters = ['size', 'default', 'rating'] as $param) {
-            if (is_null($$param)) {
-                $$param = config('services.gravatar.'.$param);
-            }
-        }
+        $config = array_filter(config("gravatar.$connection", []));
+        $url = Arr::pull($config, 'url', 'https://secure.gravatar.com/avatar');
+        $query = http_build_query($config);
 
-        $query = http_build_query(array_filter(compact($parameters)));
-
-        $url = config('services.gravatar.url');
-        $url = empty($url) ? 'https://secure.gravatar.com/avatar' : rtrim($url, '/');
-
-        return $url.'/'.md5(strtolower(trim($email))).(empty($query) ? '' : '?').$query;
+        return $url.'/'.md5(strtolower(trim($email))).($query ? "?$query" : '');
     }
 }
