@@ -1,77 +1,44 @@
 # Laravel Gravatar Helper
 
-<img align="right" src="https://gravatar.cat.net/avatar/00000000000000000000000000000000">
+<img align="right" src="https://secure.gravatar.com/avatar/00000000000000000000000000000000">
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/elfsundae/laravel-gravatar.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-gravatar)
+[![Build Status](https://img.shields.io/travis/ElfSundae/laravel-gravatar/master.svg?style=flat-square)](https://travis-ci.org/ElfSundae/laravel-gravatar)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 
-The easiest way to generate [Gravatar](https://gravatar.com) avatar URL.
+The easiest way to generate [Gravatar](https://gravatar.com) avatar URL, with multiple connections support.
 
 ## Installation
+
+You can install this package using the [Composer](https://getcomposer.org) manager:
 
 ```sh
 $ composer require elfsundae/laravel-gravatar
 ```
 
-## Usage
+Then copy the [configuration file](config/gravatar.php) to your application:
 
-There is only one global helper function you may use:
+```sh
+$ cp vendor/elfsundae/laravel-gravatar/config/gravatar.php config/gravatar.php
+```
+
+For Lumen, you need to load the configuration file in `bootstrap/app.php` :
+
+```php
+$app->configure('gravatar');
+```
+
+## API
+
+[`gravatar()`](src/helpers.php) is a global helper function you can use anywhere.
 
 ```php
 /**
- * Generate Gravatar URL for the given email address.
+ * Generate Gravatar avatar URL for the given email address.
  *
  * @param  string  $email
- * @param  int|string|null  $size
- * @param  string|null  $default
- * @param  string|null  $rating
+ * @param  string  $connection
  * @return string
  */
-gravatar($email, $size = null, $default = null, $rating = null)
+gravatar($email, $connection = 'default')
 ```
-
-Example:
-
-```php
-gravatar('foo@bar');
-// "https://secure.gravatar.com/avatar/cca210311c3caf70e4a335aad6fa1047"
-
-gravatar('foo@bar', 120, 'identicon', 'pg');
-// "https://secure.gravatar.com/avatar/cca210311c3caf70e4a335aad6fa1047?size=120&default=identicon&rating=pg"
-```
-
-## Configuration
-
-If you want to configure some default parameters for your application, copy [following content](config/services.php) to the config file `config/services.php` and custom as you want.
-
-```php
-    /*
-    |--------------------------------------------------------------------------
-    | Gravatar - Globally Recognized Avatars - https://gravatar.com
-    |--------------------------------------------------------------------------
-    |
-    | All configuration value can be an empty string or null to use the
-    | Gravatar default value.
-    |
-    | url      The root URL of Gravatar service.
-    |            https://secure.gravatar.com/avatar         (Default)
-    |            https://gravatar.cat.net/avatar            (China Mirror)
-    |            https://v2ex.assets.uxengine.net/gravatar  (China Mirror)
-    | size     The default avatar size in pixel, default is "80".
-    | default  The default avatar image.
-    |            404, mm, identicon, monsterid, wavatar, retro, blank, "http://image/url"
-    | rating   The highest avatar rating, default is "g".
-    |            g, pg, r, x
-    |
-    */
-
-    'gravatar' => [
-        'url' => '',
-        'size' => '',
-        'default' => '',
-        'rating' => '',
-    ],
-```
-
-## License
-
-The MIT License.
