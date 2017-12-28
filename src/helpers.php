@@ -14,8 +14,10 @@ if (! function_exists('gravatar')) {
     {
         $config = array_filter(config("gravatar.$connection", []));
         $url = Arr::pull($config, 'url', 'https://secure.gravatar.com/avatar');
+        $hash = strlen($email) == 32 && ctype_xdigit($email)
+            ? $email : md5(strtolower(trim($email)));
         $query = http_build_query($config);
 
-        return $url.'/'.md5(strtolower(trim($email))).($query ? "?$query" : '');
+        return $url.'/'.$hash.($query ? '?'.$query : '');
     }
 }
