@@ -13,7 +13,8 @@ if (! function_exists('gravatar')) {
     function gravatar($email, $connection = 'default', $size = null)
     {
         $hash = strlen($email) == 32 && ctype_xdigit($email)
-            ? $email : md5(strtolower(trim($email)));
+            ? strtolower($email)
+            : md5(strtolower(trim($email)));
 
         if (is_int($connection)) {
             list($connection, $size) = [
@@ -22,7 +23,7 @@ if (! function_exists('gravatar')) {
         }
 
         $config = array_filter(array_merge(
-            config('gravatar.'.$connection, []), compact($size)
+            config('gravatar.'.$connection, []), compact('size')
         ));
 
         $url = array_pull($config, 'url', 'https://secure.gravatar.com/avatar');
