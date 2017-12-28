@@ -22,9 +22,9 @@ if (! function_exists('gravatar')) {
             ];
         }
 
-        $config = array_filter(array_merge(
-            config('gravatar.'.$connection, []), compact('size')
-        ));
+        $config = array_filter(
+            config('gravatar.'.$connection, []) + compact('size')
+        );
 
         $url = array_pull($config, 'url', 'https://secure.gravatar.com/avatar');
         $query = http_build_query($config);
