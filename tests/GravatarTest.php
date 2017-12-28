@@ -1,92 +1,124 @@
 <?php
 
-use Illuminate\Support\Arr;
 use PHPUnit\Framework\TestCase;
 
 function config($key = null, $default = null)
 {
-    return Arr::get(['gravatar' => GravatarTest::$config], $key, $default);
+    return array_get(['gravatar' => GravatarTest::$config], $key, $default);
 }
 
 class GravatarTest extends TestCase
 {
     public static $config = [];
 
-    public function testGenerateURL()
+    public function testBasic()
     {
-        static::$config = [
-            'empty' => [
-                'url' => '',
-                'size' => '',
-                'default' => '',
-                'rating' => '',
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
+            gravatar('foo@bar.com')
+        );
+
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?size=100',
+            gravatar('foo@bar.com', 100)
+        );
+    }
+
+    public function testEmail()
+    {
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
+            gravatar(' FOO@BAR.COM ')
+        );
+
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
+            gravatar('f3ada405ce890b6f8204094deb12d8a8')
+        );
+
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8',
+            gravatar('F3ADA405CE890B6F8204094DEB12D8A8')
+        );
+    }
+
+    public function testDefaultConnection()
+    {
+        $this->config([
+            'default' => [
+                'url' => 'http://default',
             ],
-            'url' => [
-                'url' => '//avatar',
-            ],
-            'full_key' => [
-                'url' => '//avatar',
-                'size' => 200,
+        ]);
+
+        $this->assertSame(
+            'http://default/f3ada405ce890b6f8204094deb12d8a8',
+            gravatar('foo@bar.com')
+        );
+
+        $this->assertSame(
+            'http://default/f3ada405ce890b6f8204094deb12d8a8?size=100',
+            gravatar('foo@bar.com', 100)
+        );
+    }
+
+    public function testConfig()
+    {
+        $this->config([
+            'config' => [
+                'url' => 'http://url',
+                'size' => 100,
                 'default' => 'mm',
-                'rating' => 'x',
-                'forcedefault' => 'y',
-            ],
-            'short_key' => [
-                'url' => '//avatar',
-                's' => 200,
-                'd' => 'mm',
-                'r' => 'x',
+                'r' => 'pg',
                 'f' => 'y',
+                'extra' => 'extra/value',
+                'empty' => null,
+                'empty1' => '',
+                'empty2' => false,
             ],
-            'extra_key' => [
-                'url' => '//avatar',
-                's' => 200,
-                'extra' => 'value',
+        ]);
+
+        $this->assertSame(
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=100&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            gravatar('foo@bar.com', 'config')
+        );
+
+        $this->assertSame(
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            gravatar('foo@bar.com', 'config', 200)
+        );
+
+        $this->assertSame(
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            gravatar('foo@bar.com', 200, 'config')
+        );
+    }
+
+    public function testOverrideSize()
+    {
+        $this->config([
+            'default' => [
+                's' => 100,
             ],
-            'default_image_url' => [
-                'url' => '//avatar',
-                'default' => 'http://image.png',
-            ],
-        ];
+        ]);
 
-        $this->assertEquals(
-            'https://secure.gravatar.com/avatar/b48def645758b95537d4424c84d1a9ff',
-            gravatar('foo@example.com')
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?s=100',
+            gravatar('foo@bar.com')
         );
 
-        $this->assertEquals(
-            'https://secure.gravatar.com/avatar/b48def645758b95537d4424c84d1a9ff',
-            gravatar(' FOO@example.com ')
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?size=200',
+            gravatar('foo@bar.com', 200)
         );
 
-        $this->assertEquals(
-            'https://secure.gravatar.com/avatar/b48def645758b95537d4424c84d1a9ff',
-            gravatar('foo@example.com', 'empty')
+        $this->assertSame(
+            'https://secure.gravatar.com/avatar/f3ada405ce890b6f8204094deb12d8a8?size=200',
+            gravatar('foo@bar.com', 'default', 200)
         );
+    }
 
-        $this->assertEquals(
-            '//avatar/b48def645758b95537d4424c84d1a9ff',
-            gravatar('foo@example.com', 'url')
-        );
-
-        $this->assertEquals(
-            '//avatar/b48def645758b95537d4424c84d1a9ff?size=200&default=mm&rating=x&forcedefault=y',
-            gravatar('foo@example.com', 'full_key')
-        );
-
-        $this->assertEquals(
-            '//avatar/b48def645758b95537d4424c84d1a9ff?s=200&d=mm&r=x&f=y',
-            gravatar('foo@example.com', 'short_key')
-        );
-
-        $this->assertEquals(
-            '//avatar/b48def645758b95537d4424c84d1a9ff?s=200&extra=value',
-            gravatar('foo@example.com', 'extra_key')
-        );
-
-        $this->assertEquals(
-            '//avatar/b48def645758b95537d4424c84d1a9ff?default=http%3A%2F%2Fimage.png',
-            gravatar('foo@example.com', 'default_image_url')
-        );
+    protected function config(array $config)
+    {
+        static::$config = $config;
     }
 }
