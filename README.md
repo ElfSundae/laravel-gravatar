@@ -3,8 +3,10 @@
 <img align="right" src="https://secure.gravatar.com/avatar/00000000000000000000000000000000">
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/elfsundae/laravel-gravatar.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-gravatar)
-[![Build Status](https://img.shields.io/travis/ElfSundae/laravel-gravatar/master.svg?style=flat-square)](https://travis-ci.org/ElfSundae/laravel-gravatar)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/ElfSundae/laravel-gravatar/master.svg?style=flat-square)](https://travis-ci.org/ElfSundae/laravel-gravatar)
+[![Quality Score](https://img.shields.io/scrutinizer/g/ElfSundae/laravel-gravatar.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-gravatar)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-gravatar/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-gravatar/?branch=master)
 
 The easiest way to generate [Gravatar](https://gravatar.com) avatar URL, with multiple connections support.
 
