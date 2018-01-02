@@ -29,7 +29,7 @@ if (! function_exists('gravatar')) {
         }
 
         $url = array_pull($config, 'url', 'https://secure.gravatar.com/avatar');
-        $query = http_build_query($config);
+        $query = http_build_query($config, null, '&', PHP_QUERY_RFC3986);
 
         return $url.'/'.$hash.($query ? '?'.$query : '');
     }

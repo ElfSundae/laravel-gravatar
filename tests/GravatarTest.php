@@ -70,7 +70,7 @@ class GravatarTest extends TestCase
                 'default' => 'mm',
                 'r' => 'pg',
                 'f' => 'y',
-                'extra' => 'extra/value',
+                'extra' => 'extra value',
                 'empty' => null,
                 'empty1' => '',
                 'empty2' => false,
@@ -78,17 +78,17 @@ class GravatarTest extends TestCase
         ]);
 
         $this->assertSame(
-            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=100&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=100&default=mm&r=pg&f=y&extra=extra%20value',
             gravatar('foo@bar.com', 'config')
         );
 
         $this->assertSame(
-            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%20value',
             gravatar('foo@bar.com', 'config', 200)
         );
 
         $this->assertSame(
-            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%2Fvalue',
+            'http://url/f3ada405ce890b6f8204094deb12d8a8?size=200&default=mm&r=pg&f=y&extra=extra%20value',
             gravatar('foo@bar.com', 200, 'config')
         );
     }
