@@ -1,16 +1,9 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
-
-function config($key = null, $default = null)
-{
-    return array_get(['gravatar' => GravatarTest::$config], $key, $default);
-}
+use Orchestra\Testbench\TestCase;
 
 class GravatarTest extends TestCase
 {
-    public static $config = [];
-
     public function testBasic()
     {
         $this->assertSame(
@@ -119,6 +112,6 @@ class GravatarTest extends TestCase
 
     protected function config(array $config)
     {
-        static::$config = $config;
+        $this->app['config']->set('gravatar', $config);
     }
 }
