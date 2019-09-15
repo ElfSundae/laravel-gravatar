@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Arr;
+
 if (! function_exists('gravatar')) {
     /**
      * Generate Gravatar avatar URL for the given email address.
@@ -28,7 +30,7 @@ if (! function_exists('gravatar')) {
             $config['size'] = $size;
         }
 
-        $url = array_pull($config, 'url', 'https://secure.gravatar.com/avatar');
+        $url = Arr::pull($config, 'url', 'https://secure.gravatar.com/avatar');
         $query = http_build_query($config, null, '&', PHP_QUERY_RFC3986);
 
         return $url.'/'.$hash.($query ? '?'.$query : '');
