@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Config;
 
 if (! function_exists('gravatar')) {
     /**
@@ -24,9 +23,7 @@ if (! function_exists('gravatar')) {
             ];
         }
 
-        $config = ($repository = Config::getFacadeRoot())
-            ? array_filter($repository->get('gravatar.'.$connection, []))
-            : [];
+        $config = array_filter(config('gravatar.'.$connection, []));
 
         if ($size) {
             unset($config['s']);
