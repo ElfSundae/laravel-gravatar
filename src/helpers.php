@@ -34,7 +34,7 @@ if (! function_exists('gravatar')) {
         }
 
         $url = Arr::pull($config, 'url', 'https://secure.gravatar.com/avatar');
-        $query = http_build_query($config, null, '&', PHP_QUERY_RFC3986);
+        $query = http_build_query($config, '', '&', PHP_QUERY_RFC3986);
 
         return $url.'/'.$hash.($query ? '?'.$query : '');
     }
